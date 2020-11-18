@@ -20,6 +20,7 @@ class CreateArticlesTable extends Migration
             $table->string('image_path', 100);
             $table->string('title', 30);
             $table->text('body');
+            $table->unsignedBigInteger('views');
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
