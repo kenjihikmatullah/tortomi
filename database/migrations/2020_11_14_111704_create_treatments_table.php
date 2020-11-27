@@ -16,8 +16,8 @@ class CreateTreatmentsTable extends Migration
         Schema::create('treatments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('turtle_type_id');
-            $table->foreign('turtle_type_id')->references('id')->on('turtle_types');
-            $table->string('name', 30);
+            $table->foreign('turtle_type_id')->references('id')->on('turtle_types')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('title', 30);
             $table->text('body');
             $table->timestamps();
         });
