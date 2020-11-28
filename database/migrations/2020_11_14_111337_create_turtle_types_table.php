@@ -15,10 +15,11 @@ class CreateTurtleTypesTable extends Migration
     {
         Schema::create('turtle_types', function (Blueprint $table) {
             $table->id();
-            $table->string('image_path', 30);
+            $table->string('image_path', 30)->default(null);
             $table->string('name', 30);
             $table->text('description');
             $table->timestamps();
+            $table->softDeletes('deleted_at', 0);
         });
     }
 
