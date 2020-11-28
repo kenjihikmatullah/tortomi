@@ -18,7 +18,7 @@ class CreateArticlesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('image_path', 100)->default(null);
-            $table->string('title', 30);
+            $table->string('title', 75);
             $table->text('body');
             $table->unsignedBigInteger('views')->default(0);
             $table->timestamps();

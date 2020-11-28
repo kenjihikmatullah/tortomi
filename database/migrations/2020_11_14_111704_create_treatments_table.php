@@ -17,7 +17,7 @@ class CreateTreatmentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('turtle_type_id');
             $table->foreign('turtle_type_id')->references('id')->on('turtle_types')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('title', 30);
+            $table->string('title', 75);
             $table->text('body');
             $table->unsignedBigInteger('views')->default(0);
             $table->timestamps();
