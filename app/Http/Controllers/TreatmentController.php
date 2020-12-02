@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Treatment;
+use App\Models\TreatmentTask;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -15,7 +16,7 @@ class TreatmentController extends Controller
      */
     public function index()
     {
-        $treatments = Treatment::all('id', 'image_path', 'title');
+        $treatments = Treatment::all('id', 'image_path', 'title', 'views');
         return response()->json(['treatments' => $treatments], Response::HTTP_OK);
     }
 
@@ -25,8 +26,11 @@ class TreatmentController extends Controller
      * @param  \App\Models\Treatment  $treatment
      * @return \Illuminate\Http\Response
      */
-    public function show(Treatment $treatment)
+    public function show($id)
     {
+        $treatment = Treatment::find($id);
+        $treatment->tasks = TreatmentTask::where('treatment_id', $id)->get();
+
         return response()->json(['treatment' => $treatment], Response::HTTP_OK);
     }
 
@@ -34,6 +38,6 @@ class TreatmentController extends Controller
     {
         $treatment->increment('views', 1);
 
-        return response(Response::HTTP_OK);
+        return response()->json(['success' => true], Response::HTTP_OK);
     }
 }
