@@ -10,13 +10,14 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::all('id, user_id, image_path, title');
+        $articles = Article::select('id', 'image_path', 'title')->with('user')->get();
 
         return response()->json(['articles' => $articles], Response::HTTP_OK);
     }
 
-    public function show(Article $article)
+    public function show($id)
     {
+        $article = Article::find($id);
         return response()->json(['article' => $article], Response::HTTP_OK);
     }
 
