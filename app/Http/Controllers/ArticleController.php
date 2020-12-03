@@ -13,13 +13,20 @@ class ArticleController extends Controller
     {
         $articles = Article::select('id', 'image_path', 'title', 'views')->with('user')->get();
 
+        foreach ($articles as $article)
+        {
+            $article->transformPath();
+        }
+
         return response()->json(['articles' => $articles], Response::HTTP_OK);
     }
 
     public function show($id)
     {
         $article = Article::find($id);
+        $article->transformPath();
         $article->user = User::find($article->user_id);
+        
         return response()->json(['article' => $article], Response::HTTP_OK);
     }
 

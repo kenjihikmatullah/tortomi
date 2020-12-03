@@ -17,6 +17,12 @@ class TreatmentController extends Controller
     public function index()
     {
         $treatments = Treatment::all('id', 'image_path', 'title', 'views');
+
+        foreach ($treatments as $treatment)
+        {
+            $treatment->transformPath();
+        }
+
         return response()->json(['treatments' => $treatments], Response::HTTP_OK);
     }
 
@@ -29,6 +35,7 @@ class TreatmentController extends Controller
     public function show($id)
     {
         $treatment = Treatment::find($id);
+        $treatment->transformPath();
         $treatment->tasks = TreatmentTask::where('treatment_id', $id)->get();
 
         return response()->json(['treatment' => $treatment], Response::HTTP_OK);
