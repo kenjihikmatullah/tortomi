@@ -30,8 +30,9 @@ class ArticleController extends Controller
         return response()->json(['article' => $article], Response::HTTP_OK);
     }
 
-    public function read(Article $article)
+    public function read($id)
     {
+        $article = Article::find($id);
         $article->increment('views', 1);
 
         return response()->json(['success' => true], Response::HTTP_OK);

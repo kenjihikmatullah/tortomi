@@ -41,8 +41,9 @@ class TreatmentController extends Controller
         return response()->json(['treatment' => $treatment], Response::HTTP_OK);
     }
 
-    public function read(Treatment $treatment)
+    public function read($id)
     {
+        $treatment = Treatment::find($id);
         $treatment->increment('views', 1);
 
         return response()->json(['success' => true], Response::HTTP_OK);
