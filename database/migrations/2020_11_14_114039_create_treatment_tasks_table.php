@@ -17,9 +17,10 @@ class CreateTreatmentTasksTable extends Migration
             $table->id();
             $table->unsignedBigInteger('treatment_id');
             $table->foreign('treatment_id')->references('id')->on('treatments');
-            $table->string('name', 30);
+            $table->string('title', 75);
             $table->text('body');
             $table->timestamps();
+            $table->softDeletes('deleted_at', 0);
         });
     }
 
