@@ -24,8 +24,9 @@ class Article extends Model
     public function transformPath()
     {
         $imagePath = $this->image_path;
+        $adminUrl = env('ADMIN_URL');
 
-        if (isset($imagePath)) $this->image = asset($image_path);
+        if (isset($imagePath)) $this->image = "{$adminUrl}/storage/{$imagePath}";
         else $this->image = null;
 
         unset($this->image_path);
